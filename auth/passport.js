@@ -66,19 +66,19 @@ module.exports = app => {
                         }
                         return done(null, false);
                     } else {
-                        return done(null, false);
+                        //return done(null, false);
                         // if there is no user with that email
                         // create the user
-                        
-                        //var newUser = User.build({email:email, password:password});
+
+                        var newUser = User.build({email:email, password:password});
 
                         // save the user
-                        /*newUser.save().then(()=>{
+                        newUser.save().then(()=>{
                             delete newUser.password;
                             return done(null, newUser);
                         }).catch((err)=>{
                             throw err;
-                        });*/
+                        });
                     }
 
                 }).catch(err=>{
