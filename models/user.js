@@ -24,9 +24,6 @@ module.exports = app => {
         facebook: Sequelize.STRING,
         twitter: Sequelize.STRING,
         linkedin: Sequelize.STRING,
-        facebook: Sequelize.JSON,
-        twitter: Sequelize.JSON,
-        google: Sequelize.JSON,
         facebook_id: Sequelize.STRING
         },
         {
