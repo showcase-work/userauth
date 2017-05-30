@@ -103,6 +103,7 @@
 
   function initializeMap(locations){
     var latlongForPosition = [];
+    clearMarkers();
     locations.forEach(function(location){
       var marker = new google.maps.Marker({
                 position: location,
