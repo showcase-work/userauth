@@ -101,19 +101,18 @@
         initializeMap(locations);
   })
 
+  var gmarkers = [];
   function initializeMap(locations){
     var latlongForPosition = [];
-    clearMarkers();
+    removeMarkers();
+    
     locations.forEach(function(location){
       var marker = new google.maps.Marker({
                 position: location,
                 map: map
       });
 
-      var marker = new google.maps.Marker({
-                position: location,
-                map: map
-      });
+      gmarkers.push(marker);
 
       latlongForPosition.push(new google.maps.LatLng(location.lat, location.lng));
 
@@ -124,6 +123,12 @@
         latlngbounds.extend(latlongForPosition[i]);
     }
     map.fitBounds(latlngbounds);
+  }
+
+  function removeMarkers(){
+      for(i=0; i<gmarkers.length; i++){
+          gmarkers[i].setMap(null);
+      }
   }
 </script>
 
