@@ -17,15 +17,44 @@ module.exports = app => {
         }
         else
         {
-            res.send(false);
-            //next();
+            //res.send(false);
+            next();
         }
     }
 
-    function unlinkAccount(req,res,next,account){
-        var userId = req.user.id;
-        userService.unlinkAccount(account,userId).then((data)=>{
-            res.send(true);
+    function createAccount(req,res,next){
+        if(req.body.username && req.body.password){
+            userService.createUser(req.body).then((data)=>{
+                if(data){
+                    res.redirect("main");
+                }
+                //res.send(data);
+            }).catch(err=>{
+                next(err);
+            })
+        }
+        else
+        {
+            res.render("signup",{error:{message:"parameters not set properly"}});
+        }
+        
+    }
+
+
+    function getAllUsers(req,res,next){
+        userService.getAllUsers().then(data=>{
+            res.send(data);
+            //return res.render("users",{users:data});
+        }).catch(err=>{
+            return reject(err);
+        })
+    }
+
+    function deleteUser(req,res,nexr){
+        User.deleteUser(req.query.id).then(data=>{
+            return resolve(data);
+        }).catch(err=>{
+            return reject(err);
         })
     }
 
@@ -33,6 +62,8 @@ module.exports = app => {
 
     return {
         authenticateAndAttachUser,
-        unlinkAccount
+        createAccount,
+        getAllUsers,
+        deleteUser
     };
 };

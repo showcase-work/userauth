@@ -3,8 +3,26 @@
 module.exports = app => {
     let userController = app.controllers.userController;
 
+    
     app.use("/login", app.routes.login);
 
+    app.get("/", userController.authenticateAndAttachUser, (req,res,next)=>{     
+    console.log("stilllll here");   
+        if(req.user){
+            res.redirect("/user");
+        }
+        else
+        {
+            res.redirect("/login");
+        }
+    })
+
+    app.use("/signup", app.routes.signup);
+
+    app.use("/main", app.routes.main);
+
+
+    app.use("/user", app.routes.user);
 
     app.get("/authenticate", userController.authenticateAndAttachUser, (req,res,next) => {
         res.send(true);

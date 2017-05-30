@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% include shared/styles %>
+
+    <title></title>
+
+    <style type="text/css">
+    .error-message{
+      color:red;
+      font-size: 14px;
+      padding-top: 5px;
+      font-weight: bold;
+    }
+    </style>
+
+</head>
+<body>
+
+    <div class="container" style="padding-top:50px;">
+          <div class="login-container-modal-header">
+            <h4 class="modal-title" id="myModalLabel">Login/Signup</h4>
+          </div>
+          <form id="login-form" method = "post" action = "/login/local" >
+
+            <div class="modal-body">
+                    <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "text" placeholder="email" name="username" />
+                    <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "password" placeholder="password" name="password" />
+              
+              <%if(typeof error != 'undefined'){%>
+                <div class="error-message"><%=error.message%></div>
+              <%}%>
+              <button type="submit" class="btn btn-primary login-local" style="margin-top:20px;">Login</button>
+              <a href="/signup"><button type="button" class="btn btn-warning login-local" style="margin-top:20px;">Signup</button></a>
+            </div>
+
+          </form>
+            
+    </div>
+    
+</body>
+<% include shared/scripts %>
+</html>

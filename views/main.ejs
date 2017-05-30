@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% include shared/styles %>
+
+    <title></title>
+
+    <style type="text/css">
+      th, td{
+        text-align: center;
+      }
+      .status{
+        position: absolute;
+        top: 0px;
+        right: 8px;
+        font-size: 15px;
+        color:green;
+      }
+
+      .status.none{
+        color:red;
+      }
+    </style>
+
+</head>
+<body>
+
+    <div class="container" style="padding:50px;">
+          <div class="status none">
+            no devices connected
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>IMEI</th>
+                  <th>Longitude</th>
+                  <th>Latitude</th>
+                  <th>Velocity</th>
+                  <th>Bearing</th>
+                </tr>
+              </thead>
+              <tbody class="main-data">
+
+              </tbody>
+            </table>
+          </div>
+
+          <div id="map" style="width:100%; height:500px;"></div>
+    </div>
+
+
+    
+</body>
+<% include shared/scripts %>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_IOxTMBQt7JcfSZvTtlXIOXkK-aupu6g&callback=initMap">
+</script>
+<script>
+      var map = null;
+      function initMap(latlng) {
+        var myLatLng = {lat: -25.363, lng: 131.044};
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: myLatLng
+        });
+
+      }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+<script type="text/javascript">
+  var socket = io();
+  socket.on('updateDetailsForBrowsers', function(data){
+        if(data.length ==1){
+          $(".status").html(data.length+" Device Connected");
+          $(".status").removeClass("none");
+        }
+        else if(data.length ==0){
+          $(".status").html("no devices connected");
+          $(".status").addClass("none");
+        }
+        else
+        {
+          $(".status").html(data.length+" Devices Connected");
+          $(".status").removeClass("none");
+
+        }
+        var locations = [];
+        $(".main-data").html("");
+        data.forEach(function(details){
+
+          locations.push({lat: details.latitude, lng: details.longitude});
+          
+          var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td></tr>";
+            $(".main-data").append(html);
+        })
+
+        initializeMap(locations);
+  })
+
+  function initializeMap(locations){
+    var latlongForPosition = [];
+    locations.forEach(function(location){
+      var marker = new google.maps.Marker({
+                position: location,
+                map: map
+      });
+
+      var marker = new google.maps.Marker({
+                position: location,
+                map: map
+      });
+
+      latlongForPosition.push(new google.maps.LatLng(location.lat, location.lng));
+
+    })
+
+    var latlngbounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < latlongForPosition.length; i++) {
+        latlngbounds.extend(latlongForPosition[i]);
+    }
+    map.fitBounds(latlngbounds);
+  }
+</script>
+
+
+</html>

@@ -1,23 +1,26 @@
 {
   "development": {
-    "username": "b25058132bfaab",
-    "password": "d48dbdbe",
-    "database": "heroku_17e75746f255fde",
-    "host": "us-cdbr-iron-east-03.cleardb.net",
-    "dialect": "mysql"
+    "username": "rkmryiccmdtyhh",
+    "password": "8d2b87870e46218d2ef25d681c63cfe0d46f49295875c018f2c0ef23b75a2d63",
+    "database": "d6vv9eqviff6n8",
+    "host": "ec2-107-22-223-6.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port":"5432"
   },
   "test": {
-    "username": "b25058132bfaab",
-    "password": "d48dbdbe",
-    "database": "heroku_17e75746f255fde",
-    "host": "us-cdbr-iron-east-03.cleardb.net",
-    "dialect": "mysql"
+    "username": "rkmryiccmdtyhh",
+    "password": "8d2b87870e46218d2ef25d681c63cfe0d46f49295875c018f2c0ef23b75a2d63",
+    "database": "d6vv9eqviff6n8",
+    "host": "ec2-107-22-223-6.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port":"5432"
   },
   "production": {
-    "username": "b25058132bfaab",
-    "password": "d48dbdbe",
-    "database": "heroku_17e75746f255fde",
-    "host": "us-cdbr-iron-east-03.cleardb.net",
-    "dialect": "mysql"
+    "username": "rkmryiccmdtyhh",
+    "password": "8d2b87870e46218d2ef25d681c63cfe0d46f49295875c018f2c0ef23b75a2d63",
+    "database": "d6vv9eqviff6n8",
+    "host": "ec2-107-22-223-6.compute-1.amazonaws.com",
+    "dialect": "postgres",
+    "port":"5432"
   }
 }

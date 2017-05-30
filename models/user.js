@@ -8,164 +8,83 @@ module.exports = app => {
     let logger = app.helpers.logger;
     let errorFormatter = app.helpers.errorFormatter;
 
-    var User = sequelize.define("User", {
+    var User = sequelize.define("users", {  
         id: {
-            type: Sequelize.INTEGER,
             allowNull: false,
+            autoIncrement: true,
             primaryKey: true,
-            autoIncrement: true
+            type: Sequelize.INTEGER
         },
-        
-        name: Sequelize.STRING,
-        username: {type:Sequelize.STRING, unique:true},
-        password: {type:Sequelize.STRING},
-        email: Sequelize.STRING,
-        image: Sequelize.STRING,
-        facebook: Sequelize.STRING,
-        twitter: Sequelize.STRING,
-        linkedin: Sequelize.STRING,
-        facebook_id: Sequelize.STRING
+            email: {
+            type: Sequelize.STRING
         },
-        {
-            tableName: "users",
-            timestamps: false,
+            username: {
+            type: Sequelize.STRING
+        },
+            password: {
+            type: Sequelize.STRING
+        },
+            createdAt: {
+            type: Sequelize.DATE
+        },
+            updatedAt: {
+            type: Sequelize.DATE
+        }
+    },
+    {
+        tableName: "users",
+        timestamps: false,
 
-            instanceMethods: {
-                generateHash: function(password){
-                    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
-                },
+        instanceMethods: {
+            generateHash: function(password){
+                return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+            },
 
-                validPassword: function(password){
-                    return bcrypt.compareSync(password, this.password);
-                }
-
+            validPassword: function(password){
+                return bcrypt.compareSync(password, this.password);
             }
 
-        },
-        {
-            dialect:'mysql'
         }
-    );
+
+    });
 
     User.beforeCreate(function(user, options) {
         var hashedPw = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
         user.password = hashedPw;
     });
 
-    function updateProfilePicture(url,id){
-        console.log(url);
-        console.log(id);
-        console.log("working in model now ");
-        return new Promise(function (resolve, reject) {
-            User.update(
-            {
-                image:url
-            },
-            {
-                where: { 
-                    id:id
-                }
-            }
-            ).then(function(){
-                console.log("updated successfully");
-                return resolve(true);
-            }).catch(function(e){
-                console.log("updating faile"+e);
-                return reject(e);
-            })
-        });
-    }
 
     function getme(id){
             console.log("working in getme model");
             return User.findById(id);
     }
 
-    function updatePersonalDetails(params, id){
-        return new Promise((resolve,reject)=>{
-            User.update(
-            {
-                name:params.name,
-                about:params.about,
-                contact:params.contact,
-                city:params.city,
-                college:params.college,
-                course:params.course
-            },
-            {
-                where: { 
-                    id:id
-                }
+ 
+    function createNewuser(params){
+        console.log(User);
+        console.log("working here");
+            console.log(params);
+            return User.create({username:params.username, password:params.password});
+    }
+
+    function getAllUsers(){
+        return User.findAll()
+    }
+
+    function deleteUser(id){
+        return User.destroy({
+            where:{
+                id:id
             }
-            ).then(function(){
-                console.log("updated successfully");
-                return resolve(true);
-            }).catch(function(e){
-                console.log("updating faile"+e);
-                return reject(e);
-            })
         })
     }
 
-    function updateDepartmentAndSkillsDetails(params, id){
-
-        return new Promise((resolve,reject)=>{
-            User.update(
-            {
-                departments:(params.departments).toString(),
-                skills:(params.skills).toString(),
-            },
-            {
-                where: { 
-                    id:id
-                }
-            }
-            ).then(function(){
-                console.log("updated successfully");
-                return resolve(true);
-            }).catch(function(e){
-                console.log("updating faile"+e);
-                return reject(e);
-            })
-        })
-
-    }
-
-    function unlinkAccount(account,id){
-        var field = null;
-        if(account=="facebook"){
-            field={facebook:null};
-        }
-        if(account=="twitter"){
-            field={twitter:null};
-        }
-        if(account=="google"){
-            field={google:null};
-        }
-        return new Promise((resolve,reject)=>{
-            User.update(
-            field,
-            {
-                where: { 
-                    id:id
-                }
-            }
-            ).then(function(){
-                console.log("updated successfully");
-                return resolve(true);
-            }).catch(function(e){
-                console.log("updating faile"+e);
-                return reject(e);
-            })
-        })
-    }
 
     return {
         User,
-        updateProfilePicture,
-        updatePersonalDetails,
-        updateDepartmentAndSkillsDetails,
-        unlinkAccount,
-        getme
+        getme,
+        createNewuser,
+        getAllUsers,
+        deleteUser
     };
 };

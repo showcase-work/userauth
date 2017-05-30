@@ -1,11 +1,9 @@
 module.exports = {
-mysql: {
-        username: process.env.SP_DB_USERNAME,
-        password: process.env.SP_DB_PASSWORD,
-        database: process.env.SP_DB_NAME,
-        options:{
-            host: process.env.SP_DB_HOST,
-            timezone: '+05:30'
-        } 
+    postgressql: {
+        database:process.env.LT_DB_DATABASE,
+        username:process.env.LT_DB_USERNAME,
+        password:process.env.LT_DB_PASSWORD,
+        host:process.env.LT_DB_HOST,
+        port:process.env.LT_DB_PORT
     }
 }

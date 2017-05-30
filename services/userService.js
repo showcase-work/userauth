@@ -5,14 +5,7 @@ module.exports = app => {
     let logger = app.helpers.logger;
     let User = app.models.user;
     
-    function changeProfilePicture (url,userId) {
-        return new Promise((resolve,reject)=>{
-            User.updateProfilePicture(url,userId).then(result=>{
-                return resolve(result);
-            })
-        })
-        
-    }
+   
 
     function getme(id) {
         return new Promise((resolve,reject)=>{
@@ -24,37 +17,42 @@ module.exports = app => {
         }) 
     }
 
-    function updatePersonalDetails(params, id){
+    
+    function createUser(params){
         return new Promise((resolve,reject)=>{
-            User.updatePersonalDetails(params, id).then((data)=>{
+            User.createNewuser(params).then(data=>{
                 return resolve(data);
+            }).catch(err=>{
+                return reject(err);
             });
         })
     }
 
-    function updateDepartmentAndSkillsDetails(params, id){
+    function getAllUsers(){
         return new Promise((resolve,reject)=>{
-            User.updateDepartmentAndSkillsDetails(params, id).then((data)=>{
-                var c = (params.departments).toString();
+            User.getAllUsers().then(data=>{
                 return resolve(data);
+            }).catch(err=>{
+                return reject(err);
             })
         })
     }
 
-    function unlinkAccount(account,id){
+    function deleteUser(id){
         return new Promise((resolve,reject)=>{
-            User.unlinkAccount(account, id).then((data)=>{
+            User.deleteUser(id).then(data=>{
                 return resolve(data);
+            }).catch(err=>{
+                return reject(err);
             })
         })
     }
 
 
     return {
-        changeProfilePicture,
-        updatePersonalDetails,
         getme,
-        updateDepartmentAndSkillsDetails,
-        unlinkAccount
+        createUser,
+        getAllUsers,
+        deleteUser
     };
 };
