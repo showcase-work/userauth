@@ -74,6 +74,7 @@
 <script type="text/javascript">
   var socket = io();
   socket.on('updateDetailsForBrowsers', function(data){
+        console.log(data);
         if(data.length ==1){
           $(".status").html(data.length+" Device Connected");
           $(".status").removeClass("none");
