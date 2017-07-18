@@ -38,7 +38,7 @@ module.exports = app => {
         }
     },
     {
-        tableName: "tracking_today",
+        tableName: "loctracker",
         timestamps: true
     });
 
