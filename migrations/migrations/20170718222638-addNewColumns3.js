@@ -10,25 +10,40 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
 
-    queryInterface.addColumn(
-     'tracking_day',
+    
+    /*queryInterface.addColumn(
+      'tracking_day',
       'shape',
-      Sequelize.GEOMETRY('POINT'));
-
+      {
+        type: Sequelize.GEOMETRY('POINT'),
+        allowNull: true
+      }
+    );*/
     queryInterface.addColumn(
-     'tracking_day',
+      'tracking_day',
       'identificador',
-      Sequelize.STRING);
-
+      {
+        type: Sequelize.STRING,
+        allowNull: true
+      }
+    );
     queryInterface.addColumn(
-     'tracking_day',
+      'tracking_day',
       'parsed',
-      Sequelize.INTEGER);
-
+      {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      }
+    );
     queryInterface.addColumn(
-     'tracking_day',
+      'tracking_day',
       'alert',
-      Sequelize.INTEGER);
+      {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      }
+    );
+
   },
 
   down: function (queryInterface, Sequelize) {
@@ -45,7 +60,7 @@ module.exports = {
     queryInterface.removeColumn(
       'tracking_day',
       'alert');
-    
+
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
