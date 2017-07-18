@@ -6,22 +6,22 @@ module.exports = {
     queryInterface.addColumn(
      'tracking_day',
       'shape',
-      "Sequelize.GEOMETRY('POINT')");
+      Sequelize.GEOMETRY('POINT'));
 
     queryInterface.addColumn(
      'tracking_day',
       'identificador',
-      "Sequelize.STRING");
+      Sequelize.STRING);
 
     queryInterface.addColumn(
      'tracking_day',
       'parsed',
-      "Sequelize.INTEGER");
+      Sequelize.INTEGER);
 
     queryInterface.addColumn(
      'tracking_day',
       'alert',
-      "Sequelize.INTEGER");
+      Sequelize.INTEGER);
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
