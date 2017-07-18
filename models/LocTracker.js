@@ -44,6 +44,9 @@ module.exports = app => {
         },
             alert:{
                 type: Sequelize.INTEGER
+        },
+            shape:{
+                type: Sequelize.GEOMETRY('POINT')
         }
 
     },
