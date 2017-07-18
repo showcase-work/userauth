@@ -20,7 +20,7 @@ module.exports = {
       }
     );*/
     queryInterface.addColumn(
-      'tracking_day',
+      "tracking_day",
       'identificador',
       {
         type: Sequelize.STRING,
@@ -28,7 +28,7 @@ module.exports = {
       }
     );
     queryInterface.addColumn(
-      'tracking_day',
+      "tracking_day",
       'parsed',
       {
         type: Sequelize.INTEGER,
@@ -36,7 +36,7 @@ module.exports = {
       }
     );
     queryInterface.addColumn(
-      'tracking_day',
+      "tracking_day",
       'alert',
       {
         type: Sequelize.INTEGER,
