@@ -35,7 +35,17 @@ module.exports = app => {
         },
             updatedAt: {
             type: Sequelize.DATE
+        },
+            identificador:{
+                type: Sequelize.STRING
+        },
+            parsed:{
+                type: Sequelize.INTEGER
+        },
+            alert:{
+                type: Sequelize.INTEGER
         }
+
     },
     {
         tableName: "tracking_day",

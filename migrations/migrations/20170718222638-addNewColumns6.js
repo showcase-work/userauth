@@ -19,28 +19,30 @@ module.exports = {
         allowNull: true
       }
     );*/
-    queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: ''
-      },
+    queryInterface.addColumn(
+      "tracking_day",
       'identificador',
-      Sequelize.STRING
-    )
-    queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: ''
-      },
+      {
+        type: Sequelize.STRING,
+        allowNull: true
+      }
+    );
+    queryInterface.addColumn(
+      "tracking_day",
       'parsed',
-      Sequelize.INTEGER
-    )
-    queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: ''
-      },
+      {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      }
+    );
+    queryInterface.addColumn(
+      "tracking_day",
       'alert',
-      Sequelize.INTEGER
-    )
-    
+      {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      }
+    );
 
   },
 
