@@ -38,7 +38,5 @@ module.exports = {
     queryInterface.removeColumn(
       'tracking_day',
       'batteryTemperature');
-
-
     }
 };
