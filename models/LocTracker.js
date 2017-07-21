@@ -47,6 +47,15 @@ module.exports = app => {
         },
             shape:{
                 type: Sequelize.GEOMETRY('POINT')
+        },
+            batteryLevel:{
+                type: Sequelize.STRING
+        },
+            batteryStatus:{
+                type: Sequelize.STRING
+        },
+            batteryTemperature:{
+                type: Sequelize.STRING
         }
 
     },
@@ -67,7 +76,10 @@ module.exports = app => {
                 velocity:params.velocity, 
                 longitude:params.longitude,
                 bearing:params.bearing, 
-                latitude:params.latitude
+                latitude:params.latitude,
+                batteryLevel:params.batteryLevel,
+                batteryStatus:params.batteryStatus,
+                batteryTemperature:params.batteryTemperature
             });
     }
 
