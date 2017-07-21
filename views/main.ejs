@@ -98,7 +98,7 @@
 
           locations.push({lat: details.latitude, lng: details.longitude});
           
-          var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td></tr>"+details.batteryLevel+"</td></tr>"+details.batteryTemperature+" C"+"</td></tr>"+details.batteryStatus+"</td></tr>";
+          var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td></td>"+details.batteryLevel+"</td></td>"+details.batteryTemperature+" C"+"</td></td>"+details.batteryStatus+"</td></tr>";
             $(".main-data").append(html);
         })
 
