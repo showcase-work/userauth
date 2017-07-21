@@ -39,9 +39,6 @@ module.exports = {
       'tracking_day',
       'batteryTemperature');
 
-    
+
     }
-
-
-  }
 };
