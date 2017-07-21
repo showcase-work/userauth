@@ -41,6 +41,9 @@
                   <th>Latitude</th>
                   <th>Velocity</th>
                   <th>Bearing</th>
+                  <th>Battery Level</th>
+                  <th>Battery Temperature</th>
+                  <th>Battery Status</th>
                 </tr>
               </thead>
               <tbody class="main-data">
@@ -95,7 +98,7 @@
 
           locations.push({lat: details.latitude, lng: details.longitude});
           
-          var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td></tr>";
+          var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td></tr>"+details.batteryLevel+"</td></tr>"+details.batteryTemperature+" C"+"</td></tr>"+details.batteryStatus+"</td></tr>";
             $(".main-data").append(html);
         })
 
