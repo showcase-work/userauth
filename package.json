@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node_modules/.bin/sequelize db:migrate; node app",
+    "start": "npm update; node_modules/.bin/sequelize db:migrate; node app",
     "test": "./node_modules/.bin/mocha ./test/**/*.js",
     "eslint": "./node_modules/.bin/eslint .",
     "apidoc": "apidoc -i controllers/ -o public/apidoc"
