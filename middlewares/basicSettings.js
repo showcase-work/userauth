@@ -28,10 +28,10 @@ module.exports = app => {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(cookieParser());
-    app.use(session({ 
+    /*app.use(session({ 
         secret: 'ilovescotchscotchyscotchscotch',
         resave: true,
         saveUninitialized: false })); // session secret
-    app.use(flash());
+    app.use(flash());*/
 
 };
