@@ -27,15 +27,14 @@ module.exports = {
       }
     });
 
-    console.log("here");
     queryInterface.bulkInsert('time_zones', [
       {
-        email: 'saurabhbhbhar',
-        username: 'India',
+        username: 'admin',
+        password: '12345',
       },
       {
-        email: 'asjkdhfjasdf',
-        username: 'Mexico',
+        email: 'saurabh',
+        username: '12345',
       }
     ]);    
 

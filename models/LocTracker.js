@@ -64,8 +64,6 @@ module.exports = app => {
         timestamps: true
     });
 
-    LocTracker.schema("public");
-
     
 
 
