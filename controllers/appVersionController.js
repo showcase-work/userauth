@@ -6,7 +6,8 @@ module.exports = app => {
    
 
     function updateAppVersion(req,res,next){
-        
+        console.log("wokring in updating app version");
+        console.log(req.body);
         appVersionService.updateAppVersion(req.body).then((data)=>{
             res.send(data);
         }).catch(err=>{
@@ -16,6 +17,8 @@ module.exports = app => {
 
     function getLatestAppVersion(req,res,next){
         appVersionService.getLatestAppVersion().then(data=>{
+            console.log("wokring in herre");
+            console.log(data);
             res.send(data);
         }).catch(err=>{
             console.log("error coming");

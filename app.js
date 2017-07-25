@@ -25,7 +25,6 @@ consign()
     .into(app);
 
 let http = app.middlewares.socket.http;
-
 http.listen(appPort, () => {
     logger.info(`Server started on port ${appPort}`);
 });

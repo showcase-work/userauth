@@ -33,7 +33,9 @@ module.exports = app => {
 
  
     function updateAppVersion(params){
-            return LocTracker.create({
+        console.log(params);
+        console.log(params.version);
+            return AppVersion.create({
                 version:params.version,
                 versionName:params.versionName, 
                 details:params.details
