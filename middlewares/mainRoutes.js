@@ -21,7 +21,7 @@ module.exports = app => {
 
     app.use("/main", app.routes.main);
 
-    /*app.use("/app-version", app.routes.version);*/
+    app.use("/app-version", app.routes.version);
 
     app.use("/user", app.routes.user);
 
