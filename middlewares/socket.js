@@ -30,8 +30,11 @@ module.exports = app => {
         });
 
         socket.on('updateDetails', function(data){
+            console.log("updating details");
             socket.mobileData=data;
             var index = allSockets.indexOf(socket);
+            console.log(index);
+            console.log(data);
             if(index<0){
                 allSockets.push(socket);
                 dataForBrowsers.push(data);

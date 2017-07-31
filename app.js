@@ -6,7 +6,7 @@ let app = express();
 
 
 
-let appPort = process.env.PORT || "8080";
+let appPort = /*process.env.PORT || */"8080";
 consign()
     .include("./helpers")
     .then("./middlewares/basicSettings.js")
