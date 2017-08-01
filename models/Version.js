@@ -45,6 +45,7 @@ module.exports = app => {
     function getLatestAppVersion(){
         return AppVersion.findAll({
             limit: 1,
+            raw: true,
             order: [ [ 'createdAt', 'DESC' ]]
         })
     }
