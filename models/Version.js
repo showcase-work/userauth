@@ -24,6 +24,10 @@ module.exports = app => {
             details: {
             type: Sequelize.STRING,
             allowNull: true,
+        },
+            path:{
+                type:Sequelize.STRING,
+
         }
     },
     {
@@ -32,13 +36,12 @@ module.exports = app => {
     });
 
  
-    function updateAppVersion(params){
-        console.log(params);
-        console.log(params.version);
+    function updateAppVersion(params, path){
             return AppVersion.create({
                 version:params.version,
                 versionName:params.versionName, 
-                details:params.details
+                details:params.details,
+                path:path
             });
     }
 

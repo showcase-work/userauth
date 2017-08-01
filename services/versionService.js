@@ -5,10 +5,10 @@ module.exports = app => {
 
     let AppVersion = app.models.Version;
 
-    function updateAppVersion(details){
-            console.log(details);
+    function updateAppVersion(details,path){
+            console.log(details,path);
             return new Promise((resolve,reject)=>{
-                AppVersion.updateAppVersion(details).then((data)=>{
+                AppVersion.updateAppVersion(details, path).then((data)=>{
                 return resolve(data);
             }).catch(err=>{
                 console.log("error");
