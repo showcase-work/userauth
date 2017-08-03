@@ -3,17 +3,16 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'appversion'
       },
-      'parsed',
-      Sequelize.INTEGER
+      'path',
+      Sequelize.STRING
     );
   },
 
   down: function (queryInterface, Sequelize) {
     queryInterface.removeColumn(
-      'tracking_day',
-      'parsed');
+      'appversion',
+      'path');
   }
 };

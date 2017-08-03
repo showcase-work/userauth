@@ -20,22 +20,19 @@ module.exports = {
       }
     );*/
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'tracking_day'
       },
       'identificador',
       Sequelize.STRING
     );
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'tracking_day'
       },
       'parsed',
       Sequelize.STRING
     );
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'tracking_day'
       },
       'alert',
       Sequelize.STRING

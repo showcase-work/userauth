@@ -11,8 +11,7 @@ module.exports = {
     */
 
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'tracking_day'
       },
       'shape',
       Sequelize.GEOMETRY('POINT')

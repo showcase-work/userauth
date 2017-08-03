@@ -3,15 +3,13 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.addColumn({
-        tableName: 'appversion',
-        schema: 'sde'
+        tableName: 'appversion'
       },
       'createdAt',
       Sequelize.DATE
     );
     queryInterface.addColumn({
-        tableName: 'appversion',
-        schema: 'sde'
+        tableName: 'appversion'
       },
       'updatedAt',
       Sequelize.DATE

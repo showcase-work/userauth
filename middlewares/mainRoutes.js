@@ -7,7 +7,6 @@ module.exports = app => {
     app.use("/login", app.routes.login);
 
     app.get("/", userController.authenticateAndAttachUser, (req,res,next)=>{     
-    console.log("stilllll here");   
         if(req.user){
             res.redirect("/user");
         }

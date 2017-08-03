@@ -62,8 +62,6 @@ module.exports = app => {
  
     function createNewuser(params){
         console.log(User);
-        console.log("working here");
-            console.log(params);
             return User.create({username:params.username, password:params.password});
     }
 

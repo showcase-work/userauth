@@ -26,10 +26,12 @@ module.exports = app => {
         if(req.body.username && req.body.password){
             userService.createUser(req.body).then((data)=>{
                 if(data){
+                    console.log(data);
                     res.redirect("main");
                 }
                 //res.send(data);
             }).catch(err=>{
+                console.log(err);
                 next(err);
             })
         }

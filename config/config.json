@@ -1,26 +1,41 @@
 {
   "development": {
-    "username": "sde",
-    "password": "passaro2017",
-    "database": "movilidad",
-    "host": "drongeic.mx",
-    "dialect": "postgres",
-    "port":"5432"
+      "dialect": "mssql",
+      "host": "drongeic.mx",
+      "username":"developer",
+      "password":"Comisi0n123",
+      "database":"mobilidad",
+      "port":1433,
+      "debug": true,
+      "dialectOptions":{
+        "instanceName": "DRONES",
+        "encrypt": true
+      }
   },
   "test": {
-    "username": "sde",
-    "password": "passaro2017",
-    "database": "movilidad",
-    "host": "drongeic.mx",
-    "dialect": "postgres",
-    "port":"5432"
+      "dialect": "mssql",
+      "host": "drongeic.mx",
+      "username":"developer",
+      "password":"Comisi0n123",
+      "database":"mobilidad",
+      "port":1433,
+      "debug": true,
+      "dialectOptions":{
+        "instanceName": "DRONES",
+        "encrypt": true
+      }
   },
   "production": {
-    "username": "sde",
-    "password": "passaro2017",
-    "database": "movilidad",
-    "host": "drongeic.mx",
-    "dialect": "postgres",
-    "port":"5432"
+      "dialect": "mssql",
+      "host": "drongeic.mx",
+      "username":"developer",
+      "password":"Comisi0n123",
+      "database":"mobilidad",
+      "port":1433,
+      "debug": true,
+      "dialectOptions":{
+        "instanceName": "DRONES",
+        "encrypt": true
+      }
   }
 }

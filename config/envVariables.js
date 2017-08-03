@@ -5,5 +5,17 @@ module.exports = {
         password:process.env.LT_DB_PASSWORD,
         host:process.env.LT_DB_HOST,
         port:process.env.LT_DB_PORT
-    }
+    },
+    mssql: {
+      dialect: "mssql",
+      host: "drongeic.mx",
+      username:"developer",
+      password:"Comisi0n123",
+      database:"mobilidad",
+      port:1433,
+      dialectOptions:{
+        "instanceName": "DRONES",
+        "encrypt": false
+      }
+  }
 }

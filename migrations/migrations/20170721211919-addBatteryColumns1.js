@@ -3,22 +3,19 @@
 module.exports = {
   up: function (queryInterface, Sequelize) {
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'tracking_day'
       },
       'batteryLevel',
       Sequelize.STRING
     );
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'tracking_day'
       },
       'batteryStatus',
       Sequelize.STRING
     );
     queryInterface.addColumn({
-        tableName: 'tracking_day',
-        schema: 'sde'
+        tableName: 'tracking_day'
       },
       'batteryTemperature',
       Sequelize.STRING

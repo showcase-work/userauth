@@ -7,12 +7,8 @@ module.exports = app => {
   // let userModel = app.models.user.UserModelSchema;
 
     //var sequelize = new Sequelize(config.mysql.database, config.mysql.username, config.mysql.password, config.mysql.options);
-    var sequelize = new Sequelize(config.postgressql.database, config.postgressql.username, config.postgressql.password, { username: config.postgressql.username,
-     password: config.postgressql.password,
-     database: config.postgressql.database,
-     host: config.postgressql.host,
-     dialect: 'postgres',
-     port: config.postgressql.port });
+    var sequelize = new Sequelize(config.mssql.database, config.mssql.username, config.mssql.password, 
+        config.mssql);
 
     return sequelize;
 };
