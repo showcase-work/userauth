@@ -8,6 +8,7 @@ module.exports = app => {
     function updateAppVersion(details,path){
             console.log("Service:updateAppVersion");
             return new Promise((resolve,reject)=>{
+            
                 AppVersion.updateAppVersion(details, path).then((data)=>{
                 return resolve(data);
             }).catch(err=>{
