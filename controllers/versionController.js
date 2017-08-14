@@ -8,7 +8,6 @@ module.exports = app => {
 
     function updateAppVersion(req,res,next){
         console.log("wokring in updating app version");
-        console.log(req.body, req.file.filename);
         appVersionService.updateAppVersion(req.body, req.file.filename).then((data)=>{
             res.send(data);
         }).catch(err=>{

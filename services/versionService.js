@@ -6,7 +6,7 @@ module.exports = app => {
     let AppVersion = app.models.Version;
 
     function updateAppVersion(details,path){
-            console.log(details,path);
+            console.log("Service:updateAppVersion");
             return new Promise((resolve,reject)=>{
                 AppVersion.updateAppVersion(details, path).then((data)=>{
                 return resolve(data);
