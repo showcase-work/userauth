@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/uikit/css/uikit.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/muikit.css">
+    <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
     <% include shared/styles %>
 
     <title></title>
@@ -27,6 +31,7 @@
 
 </head>
 <body>
+    <div class="container"></div>
 
     <div class="container" style="padding:50px;">
           <div class="status none">
@@ -59,6 +64,12 @@
     
 </body>
 <% include shared/scripts %>
+
+<script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/uikit/js/uikit.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_IOxTMBQt7JcfSZvTtlXIOXkK-aupu6g&callback=initMap">
 </script>
@@ -74,6 +85,8 @@
       }
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
+
+
 <script type="text/javascript">
   var socket = io();
   socket.on('updateDetailsForBrowsers', function(data){
