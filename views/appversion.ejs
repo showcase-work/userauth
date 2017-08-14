@@ -25,19 +25,15 @@
             <h4 class="modal-title" id="myModalLabel">Login/Signup</h4>
           </div>
           <form id="login-form" method = "post" action = "/app-version/register" enctype="multipart/form-data" >
-
-            <div class="modal-body">
-                    <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "text" placeholder="version" name="version" />
-                    <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "text" placeholder="version name" name="versionName" />
-                    <input type="text" name="details" placeholder="details" class="form-control-personal">
-                    <input type="file" name="filetoupload" class="form-control-personal">
+              <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "text" placeholder="version" name="version" />
+              <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "text" placeholder="version name" name="versionName" />
+              <input type="text" name="details" placeholder="details" class="form-control-personal">
+              <input type="file" name="filetoupload" class="form-control-personal">
+            <%if(typeof error != 'undefined'){%>
+              <div class="error-message"><%=error.message%></div>
+            <%}%>
+            <button type="submit" class="btn btn-primary login-local" style="margin-top:20px;">Register</button>
               
-              <%if(typeof error != 'undefined'){%>
-                <div class="error-message"><%=error.message%></div>
-              <%}%>
-              <button type="submit" class="btn btn-primary login-local" style="margin-top:20px;">Register</button>
-              
-            </div>
 
           </form>
             
