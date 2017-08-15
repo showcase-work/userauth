@@ -19,17 +19,7 @@
       th, td{
         text-align: center;
       }
-      .status{
-        position: absolute;
-        top: 0px;
-        right: 8px;
-        font-size: 15px;
-        color:green;
-      }
 
-      .status.none{
-        color:red;
-      }
     </style>
 
 </head>
@@ -69,7 +59,7 @@
     <div class="container main-dashboard">
       <div class="left-section">
         <div class="card">
-            <h3>CAMINOS</h3>
+            <h3>CAMINOS (<span class="numberOfTrucks"></span>)</h3>
             <div class="card-main-content">
               <div id="mapid" style="width:100%;"></div>
             </div>
@@ -84,9 +74,7 @@
     </div>
 
     <div class="container" style="padding:50px;">
-          <div class="status none">
-            no devices connected
-          </div>
+         
           <div class="table-responsive">
             <table class="table">
               <thead>
@@ -142,29 +130,25 @@
         var marker;
         markersLayer.clearLayers();
         console.log(data);
-        if(data.length ==1){
-          $(".status").html(data.length+" Device Connected");
-          $(".status").removeClass("none");
+        if(data.length >0){
+          $(".numberOfTrucks").html(data.length);
+          $(".numberOfTrucks").removeClass("none");
         }
         else if(data.length ==0){
-          $(".status").html("no devices connected");
-          $(".status").addClass("none");
-        }
-        else
-        {
-          $(".status").html(data.length+" Devices Connected");
-          $(".status").removeClass("none");
+          $(".numberOfTrucks").html(" No devices connected ");
+          $(".numberOfTrucks").addClass("none");
         }
         var locations = [];
         $(".main-data").html("");
         data.forEach(function(details){
           var popup = L.popup()
                       .setLatLng([details.latitude, details.longitude])
-                      .setContent('<b><'+details.IMEI+'/b><br>velocity:'+details.velocity+'</br>batteryLevel:'+details.batteryLevel+'</br>batteryTemperature'+details.batteryTemperature+'<br />batteryStatus'+details.batteryStatus);
+                      .setContent('<b>'+details.IMEI+'</b><br>velocity:'+details.velocity+'</br><b>batteryLevel:</b>'+details.batteryLevel+'</br><b>batteryTemperature</b>'+details.batteryTemperature+'<br /><b>batteryStatus</b>'+details.batteryStatus);
 
           marker = L.marker([details.latitude, details.longitude], {
               clickable: true
           }).bindPopup(popup, {showOnMouseOver:true});
+          marker.on('click', onMarkerClick(details));
           markersLayer.addLayer(marker);
           locations.push({lat: details.latitude, lng: details.longitude});
           var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td><td>"+details.batteryLevel+"</td><td>"+details.batteryTemperature+" C"+"</td><td>"+details.batteryStatus+"</td></tr>";
@@ -172,9 +156,12 @@
         })
 
         markersLayer.addTo(mymap);
-
-
   })
+
+  function onMarkerClick(details){
+    console.log("clicked here");
+    console.log(details);
+  }
 
   
 
@@ -209,7 +196,7 @@
   }*/
 </script>
 <script type="text/javascript">
-  mymap = L.map("mapid").setView([19.4326, -99.1332], 10);
+  mymap = L.map("mapid").setView([19.5125, -98.9800], 13);
   L.esri.basemapLayer("Topographic").addTo(mymap);
   var caminos = L.esri.featureLayer({
     url: '/api/layer'
