@@ -17,6 +17,8 @@ module.exports = app => {
     })
 
     app.use("/signup", app.routes.signup);
+    
+    app.use("/api", app.routes.api);
 
     app.use("/main", app.routes.main);
 

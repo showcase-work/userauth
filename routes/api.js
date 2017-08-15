@@ -6,8 +6,13 @@ let router = require("express").Router();
 module.exports = app => {
     let apiController = app.controllers.apiController;
 
-    router.route('/layer').get((req,res,next)=>{
+    router.route('/layer/').get((req,res,next)=>{
         apiController.getLayer(req,res,next);
+        //return res.render("main");
+    });
+
+    router.route('/layer/query').get((req,res,next)=>{
+        apiController.getLayerWithQuery(req,res,next);
         //return res.render("main");
     });
 

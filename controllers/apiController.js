@@ -9,7 +9,15 @@ module.exports = app => {
     }
 
     function getLayer(req,res,next){
-        apiService.getLayer().then(data=>{
+        apiService.getLayer(req.query).then(data=>{
+            res.send(data);
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+    function getLayerWithQuery(req,res,next){
+        apiService.getLayerWithQuery(req.query).then(data=>{
             res.send(data);
         }).catch(err=>{
             console.log(err);
@@ -20,6 +28,7 @@ module.exports = app => {
 
     return {
         addLocTrackerDetails,
-        getLayer
+        getLayer,
+        getLayerWithQuery
     };
 };

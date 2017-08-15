@@ -15,9 +15,20 @@ module.exports = app => {
         })
     }
 
-    function getLayer(){
+    function getLayer(qs){
         return new Promise((resolve,reject)=>{
-            request('drongeic.mx:6080/arcgis/rest/services/vehiculos/caminos/FeatureServer/0', function (error, response, body) {
+            request({url:'http://drongeic.mx:6080/arcgis/rest/services/vehiculos/caminos/FeatureServer/0/',qs:qs}, function (error, response, body) {
+              console.log('error:', error); // Print the error if one occurred 
+              console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
+              console.log('body:', body); // Print the HTML for the Google homepage. 
+              return resolve(body);
+            });
+        })
+    }
+
+    function getLayerWithQuery(qs){
+        return new Promise((resolve,reject)=>{
+            request({url:'http://drongeic.mx:6080/arcgis/rest/services/vehiculos/caminos/FeatureServer/0/query',qs:qs}, function (error, response, body) {
               console.log('error:', error); // Print the error if one occurred 
               console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
               console.log('body:', body); // Print the HTML for the Google homepage. 
@@ -28,6 +39,7 @@ module.exports = app => {
 
     return {
         addLocTrackerDetails,
-        getLayer
+        getLayer,
+        getLayerWithQuery
     };
 };
