@@ -609,14 +609,14 @@ nav{
 
 
 .container .left-section{
-  width:65%;
+  width:100%;
   display: inline-block;
   vertical-align: top;
   padding-right: 10px;
 }
 
 .container .right-section{
-  width:35%;
+  width:0%;
   display: inline-block;
   vertical-align: top;
   padding-left: 10px;
