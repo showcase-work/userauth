@@ -143,7 +143,7 @@
         data.forEach(function(details){
           var popup = L.popup()
                       .setLatLng([details.latitude, details.longitude])
-                      .setContent('<b>'+details.IMEI+'</b><br><b>velocity:</b>'+details.velocity+'</br><b>batteryLevel:</b>'+details.batteryLevel+'</br><b>batteryTemperature</b>'+details.batteryTemperature+'<br /><b>batteryStatus</b>'+details.batteryStatus);
+                      .setContent('<b>'+details.IMEI+'</b><br><b>velocity: </b>'+details.velocity+'</br><b>batteryLevel: </b>'+details.batteryLevel+'</br><b>batteryTemperature: </b>'+details.batteryTemperature+'<br /><b>batteryStatus: </b>'+details.batteryStatus);
 
           marker = L.marker([details.latitude, details.longitude], {
               clickable: true
