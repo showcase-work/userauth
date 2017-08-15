@@ -196,7 +196,8 @@
 </script>
 <script type="text/javascript">
   mymap = L.map("mapid").setView([19.5125, -98.9800], 13);
-  mymap.options.maxZoom = 13;
+  mymap.options.minZoom = 13;
+  mymap.options.maxZoom = 14;
   L.esri.basemapLayer("Topographic").addTo(mymap);
   var caminos = L.esri.featureLayer({
     url: '/api/layer'
