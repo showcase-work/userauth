@@ -160,7 +160,7 @@
         data.forEach(function(details){
           var popup = L.popup()
                       .setLatLng([details.latitude, details.longitude])
-                      .setContent('<b><'+details.IMEI+'/b><br>velocity:'+details.velocity+'</br>batteryLevel:'++details.batteryLevel+'</br>batteryTemperature'+details.batteryTemperature+'<br />batteryStatus'+details.batteryStatus);
+                      .setContent('<b><'+details.IMEI+'/b><br>velocity:'+details.velocity+'</br>batteryLevel:'+details.batteryLevel+'</br>batteryTemperature'+details.batteryTemperature+'<br />batteryStatus'+details.batteryStatus);
 
           marker = L.marker([details.latitude, details.longitude], {
               clickable: true
