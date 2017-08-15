@@ -4,10 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/uikit/css/uikit.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/css/uikit.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/muikit.css">
     <link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+        integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+        crossorigin=""/>
     <% include shared/styles %>
 
     <title></title>
@@ -31,7 +34,54 @@
 
 </head>
 <body>
-    <div class="container"></div>
+
+
+    <nav class="uk-navbar">
+        
+        <div class="uk-navbar-flip">
+            <ul class="uk-navbar-nav">
+                <li data-uk-dropdown="{mode:'click'}" class="language">
+                        <button class="uk-button uk-button-default" type="button">Usario</button>
+                        <div class="uk-dropdown">
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li><a href="/?language=en">EN</a></li>
+                                <li><a href="/">ES</a></li>
+                            </ul>
+                        </div>
+                </li>
+            </ul>
+        </div>
+        <a href="#toggler" class="uk-navbar-nav uk-navbar-toggle" data-uk-offcanvas="{target:'#toggler'}"></a>
+    </nav>
+
+    <div id="toggler" class="uk-offcanvas">
+        <div class="uk-offcanvas-bar">
+            <ul>
+                <li><a href="#" data-uk-smooth-scroll>Dashboard</a></li>
+                <li><a href="#" data-uk-smooth-scroll>Caminos</a></li>
+                <li><a href="#" data-uk-smooth-scroll>Asignados</a></li>
+                <li><a href="#" data-uk-smooth-scroll>Obras</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="container main-dashboard">
+      <div class="left-section">
+        <div class="card">
+            <h3>CAMINOS</h3>
+            <div class="card-main-content">
+              <div id="mapid" style="width:100%;"></div>
+            </div>
+        </div>
+      </div><div class="right-section">
+        <div class="card">
+            <h3>DETALLES DE VEHICULES</h3>
+            <div class="card-main-content">
+            </div>
+        </div>
+      </div>
+    </div>
 
     <div class="container" style="padding:50px;">
           <div class="status none">
@@ -57,7 +107,7 @@
             </table>
           </div>
 
-          <div id="map" style="width:100%; height:500px;"></div>
+          
     </div>
 
 
@@ -66,28 +116,27 @@
 <% include shared/scripts %>
 
 <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="/bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
-<script type="text/javascript" src="/uikit/js/uikit.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.2/js/uikit.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
 
-<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_IOxTMBQt7JcfSZvTtlXIOXkK-aupu6g&callback=initMap">
-</script>
-<script>
-      var map = null;
-      function initMap(latlng) {
-        var myLatLng = {lat: -25.363, lng: 131.044};
-        map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
-          center: myLatLng
-        });
 
-      }
+<script>
+      
 </script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.1/socket.io.js"></script>
 
+<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+    integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+    crossorigin=""></script>
+
+
+  <!-- Load Esri Leaflet from CDN -->
+  <script src="https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js"
+    integrity="sha512-Tojl3UMd387f6DdAJlo+fKfJZiP55fYT+6Y58yKbHydnueOdSFOxrgLPuUxm7VW1szEt3hZVwv3V2sSUCuT35w=="
+    crossorigin=""></script>
 
 <script type="text/javascript">
+  var mymap;
   var socket = io();
   socket.on('updateDetailsForBrowsers', function(data){
         console.log(data);
@@ -115,10 +164,19 @@
             $(".main-data").append(html);
         })
 
-        initializeMap(locations);
+        addMarkers(locations);
   })
 
-  var gmarkers = [];
+  function addMarkers(locations){
+
+    locations.forEach(function(location){
+      var marker = L.marker([location.lat, location.lng]).addTo(mymap);
+      marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+    })
+    
+  }
+
+  /*var gmarkers = [];
   function initializeMap(locations){
     var latlongForPosition = [];
     removeMarkers();
@@ -146,7 +204,14 @@
       for(i=0; i<gmarkers.length; i++){
           gmarkers[i].setMap(null);
       }
-  }
+  }*/
+</script>
+<script type="text/javascript">
+  mymap = L.map("mapid").setView([19.4326, -99.1332], 10);
+  L.esri.basemapLayer("Topographic").addTo(mymap);
+  var caminos = L.esri.featureLayer({
+    url: 'http://drongeic.mx:6080/arcgis/rest/services/vehiculos/caminos/FeatureServer/0'
+  }).addTo(mymap);
 </script>
 
 
