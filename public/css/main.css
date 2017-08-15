@@ -620,6 +620,7 @@ nav{
   display: inline-block;
   vertical-align: top;
   padding-left: 10px;
+  display: none;
 }
 
 .card h3{
