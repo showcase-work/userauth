@@ -162,6 +162,10 @@
         markersLayer.addTo(mymap);
   })
 
+  socket.on('updateObjectDetailsForBrowsers', function(data){
+    console.log(data);
+  }
+
   
 
   /*var gmarkers = [];
