@@ -59,7 +59,7 @@
     <div class="container main-dashboard">
       <div class="left-section">
         <div class="card">
-            <h3>CAMINOS (<span class="numberOfTrucks"></span>)</h3>
+            <h3>CAMINOS (<span class="numberOfTrucks">0</span>)</h3>
             <div class="card-main-content">
               <div id="mapid" style="width:100%;"></div>
             </div>
@@ -126,7 +126,8 @@
   var socket = io();
   var markers = {};
   var markersLayer = new L.LayerGroup();
-  socket.on('updateDetailsForBrowsers', function(data){
+
+  /*socket.on('updateDetailsForBrowsers', function(data){
         var marker;
         markersLayer.clearLayers();
         console.log(data);
@@ -138,6 +139,8 @@
           $(".numberOfTrucks").html(" No devices connected ");
           $(".numberOfTrucks").addClass("none");
         }
+
+
         var locations = [];
         $(".main-data").html("");
         data.forEach(function(details){
@@ -160,10 +163,44 @@
         })
 
         markersLayer.addTo(mymap);
-  })
+  })*/
 
   socket.on('updateObjectDetailsForBrowsers', function(data){
     console.log(data);
+    var marker;
+    markersLayer.clearLayers();
+    var locations = [];
+    $(".main-data").html("");
+    var length = 0;
+
+    for (var key in data) {
+      if (data.hasOwnProperty(key)) {
+        length++;
+        var details = data[key];
+
+        var popup = L.popup()
+                    .setLatLng([details.latitude, details.longitude])
+                    .setContent('<b>'+details.IMEI+'</b><br><b>velocity: </b>'+details.velocity+'</br><b>batteryLevel: </b>'+details.batteryLevel+'</br><b>batteryTemperature: </b>'+details.batteryTemperature+'<br /><b>batteryStatus: </b>'+details.batteryStatus);
+
+        marker = L.marker([details.latitude, details.longitude], {
+            clickable: true
+        }).bindPopup(popup, {showOnMouseOver:true});
+        marker.on('click', function(e){
+          console.log("clcked in");
+          console.log(details);
+          console.log(e);
+        });
+        markersLayer.addLayer(marker);
+        locations.push({lat: details.latitude, lng: details.longitude});
+        var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td><td>"+details.batteryLevel+"</td><td>"+details.batteryTemperature+" C"+"</td><td>"+details.batteryStatus+"</td></tr>";
+          $(".main-data").append(html);
+
+      }
+    }
+
+    $(".numberOfTrucks").html(length);
+    markersLayer.addTo(mymap);
+
   });
 
   

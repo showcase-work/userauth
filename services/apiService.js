@@ -18,9 +18,7 @@ module.exports = app => {
     function getLayer(qs){
         return new Promise((resolve,reject)=>{
             request({url:'http://drongeic.mx:6080/arcgis/rest/services/vehiculos/caminos/FeatureServer/0/',qs:qs}, function (error, response, body) {
-              console.log('error:', error); // Print the error if one occurred 
-              console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
-              console.log('body:', body); // Print the HTML for the Google homepage. 
+              
               return resolve(body);
             });
         })
@@ -29,9 +27,7 @@ module.exports = app => {
     function getLayerWithQuery(qs){
         return new Promise((resolve,reject)=>{
             request({url:'http://drongeic.mx:6080/arcgis/rest/services/vehiculos/caminos/FeatureServer/0/query',qs:qs}, function (error, response, body) {
-              console.log('error:', error); // Print the error if one occurred 
-              console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received 
-              console.log('body:', body); // Print the HTML for the Google homepage. 
+             
               return resolve(body);
             });
         })
