@@ -16,6 +16,7 @@ module.exports = {
       dialectOptions:{
         "instanceName": "DRONES",
         "encrypt": false
-      }
+      },
+      timezone:'-06:00'
   }
 }
