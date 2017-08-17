@@ -61,7 +61,8 @@ module.exports = app => {
     },
     {
         tableName: "tracking_day",
-        timestamps: true
+        timestamps: true,
+        hasTrigger: true
     });
 
     

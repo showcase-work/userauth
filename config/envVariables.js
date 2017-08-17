@@ -17,6 +17,6 @@ module.exports = {
         "instanceName": "DRONES",
         "encrypt": false
       },
-      timezone:'-06:00'
+      timezone:'-05:00'
   }
 }
