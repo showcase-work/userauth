@@ -181,26 +181,26 @@
 
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
-        length++;
         var details = data[key];
+        length++;
+        if(details.latitude){
+          var popup = L.popup()
+                      .setLatLng([details.latitude, details.longitude])
+                      .setContent('<b>'+details.IMEI+'</b><br><b>velocity: </b>'+details.velocity+'</br><b>batteryLevel: </b>'+details.batteryLevel+'</br><b>batteryTemperature: </b>'+details.batteryTemperature+'<br /><b>batteryStatus: </b>'+details.batteryStatus);
 
-        var popup = L.popup()
-                    .setLatLng([details.latitude, details.longitude])
-                    .setContent('<b>'+details.IMEI+'</b><br><b>velocity: </b>'+details.velocity+'</br><b>batteryLevel: </b>'+details.batteryLevel+'</br><b>batteryTemperature: </b>'+details.batteryTemperature+'<br /><b>batteryStatus: </b>'+details.batteryStatus);
-
-        marker = L.marker([details.latitude, details.longitude], {
-            clickable: true
-        }).bindPopup(popup, {showOnMouseOver:true});
-        marker.on('click', function(e){
-          console.log("clcked in");
-          console.log(details);
-          console.log(e);
-        });
-        markersLayer.addLayer(marker);
-        locations.push({lat: details.latitude, lng: details.longitude});
+          marker = L.marker([details.latitude, details.longitude], {
+              clickable: true
+          }).bindPopup(popup, {showOnMouseOver:true});
+          marker.on('click', function(e){
+            console.log("clcked in");
+            console.log(details);
+            console.log(e);
+          });
+          markersLayer.addLayer(marker);
+          locations.push({lat: details.latitude, lng: details.longitude});
+        }
         var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td><td>"+details.batteryLevel+"</td><td>"+details.batteryTemperature+" C"+"</td><td>"+details.batteryStatus+"</td></tr>";
           $(".main-data").append(html);
-
       }
     }
 
@@ -243,8 +243,8 @@
 </script>
 <script type="text/javascript">
   mymap = L.map("mapid").setView([19.5125, -98.9800], 13);
-  mymap.options.minZoom = 13;
-  mymap.options.maxZoom = 14;
+  //mymap.options.minZoom = 13;
+  //mymap.options.maxZoom = 14;
   L.esri.basemapLayer("Topographic").addTo(mymap);
   var caminos = L.esri.featureLayer({
     url: '/api/layer'
