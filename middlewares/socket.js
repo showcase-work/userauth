@@ -39,6 +39,19 @@ module.exports = app => {
             apiController.addLocTrackerDetails(data);
         });
 
+
+        socket.on('finishSession', function(data){
+
+            for (var key in allSocketsObject) {
+              if (allSocketsObject.hasOwnProperty(key)) {
+                if(allSocketsObject[key].IMEI==data.IMEI){
+                    delete allSocketsObject[key];
+                }
+              }
+            }
+            io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+        });
+
     });
 
     return {
