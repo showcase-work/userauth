@@ -42,10 +42,14 @@ module.exports = app => {
         });
 
         socket.on('initialDetails', function(data){
+            console.log(data);
+            console.log("adding to initial Details");
             allSockets[data.IMEI]=socket;
         });
 
         socket.on('getLocation', function(data){
+            console.log(allSockets);
+            console.log(data);
             if(allSockets[data.IMEI]){
                 console.log("getting location of "+data.IMEI);
                 io.to(allSockets[data.IMEI].id).emit('getLocation', '');
