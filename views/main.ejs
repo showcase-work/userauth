@@ -76,6 +76,12 @@
     <div class="container" style="padding:50px;">
          
           <div class="table-responsive">
+            <div class="filters">
+              <form action="/search" method="POST" id="searchIMEI">
+                <input type="text" name="imei" class="uk-input imeiinput">
+                <button class="uk-button uk-button-primary" type="input">Submit</button>
+              </form>
+            </div>
             <table class="table">
               <thead>
                 <tr>
@@ -243,6 +249,14 @@
   var caminos = L.esri.featureLayer({
     url: '/api/layer'
   }).addTo(mymap);
+</script>
+<script type="text/javascript">
+  $("#searchIMEI").submit(function(e){
+    console.log("working in here");
+    var IMEI = $(".imeiinput").val();
+    socket.emit('getLocation', {IMEI:IMEI});
+    e.preventDefault();
+  })
 </script>
 
 
