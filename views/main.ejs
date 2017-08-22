@@ -256,8 +256,8 @@
               },
               success:function(data){
                 $(".truck-image").css("background-image",'url('+JSON.parse(data).url+')');
-                velocity.setText(markerdetails.velocity+' km/hr');
-                velocity.animate(markerdetails.velocity/50); 
+                velocity.setText((Math.round(markerdetails.velocity)/100)+' km/hr');
+                velocity.animate(markerdetails.velocity/80); 
                 battery.setText(markerdetails.batteryLevel+'%');
                 battery.animate(markerdetails.batteryLevel/100);
                 $("#imei").html("<b>"+markerdetails.IMEI+"</b>");
