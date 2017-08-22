@@ -72,7 +72,7 @@ module.exports = app => {
     function putDetails(params){
             return LocTracker.create({
                 imei:params.IMEI,
-                velocity:String(parseInt(params.velocity)*3.6), 
+                velocity:params.velocity*3.6, 
                 longitude:params.longitude,
                 bearing:params.bearing, 
                 latitude:params.latitude,

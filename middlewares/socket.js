@@ -25,7 +25,7 @@ module.exports = app => {
         });
 
         socket.on('updateDetails', function(data){
-
+            data.velocity = parseInt(data.velocity)*3.6;
             for (var key in allSocketsObject) {
               if (allSocketsObject.hasOwnProperty(key)) {
                 if(allSocketsObject[key].IMEI==data.IMEI){

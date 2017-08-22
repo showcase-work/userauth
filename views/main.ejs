@@ -225,10 +225,10 @@
         length++;
         if(details.latitude){
 
-          if(details.velocity>10){
+          if(details.velocity>40){
             icon=redIcon;
           }
-          else if(details.velocity<10 && details.velocity >0){
+          else if(details.velocity<40 && details.velocity >0){
             icon=greenIcon;
           }
           else
@@ -256,8 +256,8 @@
               },
               success:function(data){
                 $(".truck-image").css("background-image",'url('+JSON.parse(data).url+')');
-                velocity.setText(markerdetails.velocity+' m/s');
-                velocity.animate(markerdetails.velocity/27); 
+                velocity.setText(markerdetails.velocity+' km/hr');
+                velocity.animate(markerdetails.velocity/50); 
                 battery.setText(markerdetails.batteryLevel+'%');
                 battery.animate(markerdetails.batteryLevel/100);
                 $("#imei").html("<b>"+markerdetails.IMEI+"</b>");
