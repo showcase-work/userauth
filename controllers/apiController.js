@@ -24,11 +24,21 @@ module.exports = app => {
         })
     }
 
+    function getTruckPicture(req,res,next){
+        apiService.getTruckPicture(req.body.IMEI).then(data=>{
+            res.send(data);
+        }).catch(err=>{
+            console.log(err);
+            next(err);
+        })
+    }
+
     
 
     return {
         addLocTrackerDetails,
         getLayer,
-        getLayerWithQuery
+        getLayerWithQuery,
+        getTruckPicture
     };
 };

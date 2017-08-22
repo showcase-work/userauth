@@ -16,6 +16,11 @@ module.exports = app => {
         //return res.render("main");
     });
 
+    router.route('/truck-picture').post((req,res,next)=>{
+        console.log(req.body);
+        apiController.getTruckPicture(req,res,next);
+    })
+
     
     return router;
 };

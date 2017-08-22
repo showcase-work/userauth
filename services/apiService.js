@@ -33,9 +33,18 @@ module.exports = app => {
         })
     }
 
+    function getTruckPicture(IMEI){
+        return new Promise((resolve,reject)=>{
+            request({url:'http://drongeic.mx:8080/movilidad/get_placa.php',qs:{imei:IMEI}}, function (error, response, body) {
+              return resolve(body);
+            });
+        })
+    }
+
     return {
         addLocTrackerDetails,
         getLayer,
-        getLayerWithQuery
+        getLayerWithQuery,
+        getTruckPicture
     };
 };

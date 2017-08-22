@@ -66,8 +66,27 @@
         </div>
       </div><div class="right-section">
         <div class="card">
+
             <h3>DETALLES DE VEHICULES</h3>
             <div class="card-main-content">
+
+              <p style="margin-top: 5px;">VEHICULO SELECIONADO</p>
+              <p><b>IMEI</b></p>
+              <div class="truck-image"></div>
+              <div class="realtime-stats">
+                <div class="realtime-card velocity">
+                  <p>VELOCIDAD</p>
+                  <div class="velocity-level" id="velocity-progress"></div>
+                </div>
+                <div class="realtime-card battery-level">
+                  <p>BATERIA</p>
+                  <div id="battery-progress"></div>
+                </div>
+                <div class="realtime-card battery-status">
+                  <p>STATUS</p>
+                  <div id="battery-status"><b></b</div>
+                </div>
+              </div>
             </div>
         </div>
       </div>
@@ -126,75 +145,129 @@
   <script src="https://unpkg.com/esri-leaflet@2.1.0/dist/esri-leaflet.js"
     integrity="sha512-Tojl3UMd387f6DdAJlo+fKfJZiP55fYT+6Y58yKbHydnueOdSFOxrgLPuUxm7VW1szEt3hZVwv3V2sSUCuT35w=="
     crossorigin=""></script>
-
+    <script type="text/javascript" src="/bower_components/leaflet-rotatedmarker/leaflet.rotatedMarker.js"></script>
+    <script type="text/javascript" src="/bower_components/progressbar.js/dist/progressbar.js"></script>
 <script type="text/javascript">
-  var mymap;
+  var mymap = L.map("mapid").setView([19.5125, -98.9800], 13);
+  //mymap.options.minZoom = 13;
+  //mymap.options.maxZoom = 14;
+  L.esri.basemapLayer("Topographic").addTo(mymap);
+  var caminos = L.esri.featureLayer({
+    url: '/api/layer'
+  }).addTo(mymap);
+
   var socket = io();
   var markers = {};
+
+  var yellowIcon = L.icon({
+       iconUrl: '/images/arrow_yellow.png',
+       iconRetinaUrl: '/images/arrow_yellow.png',
+       iconSize: [21, 21],
+       iconAnchor: [11, 11],
+       popupAnchor: [0, -8],
+  });
+
+  var greenIcon = L.icon({
+       iconUrl: '/images/arrow_green.png',
+       iconRetinaUrl: '/images/arrow_green.png',
+       iconSize: [21, 21],
+       iconAnchor: [11, 11],
+       popupAnchor: [0, -8],
+  });
+
+  var redIcon = L.icon({
+       iconUrl: '/images/arrow_red.png',
+       iconRetinaUrl: '/images/arrow_red.png',
+       iconSize: [21, 21],
+       iconAnchor: [11, 11],
+       popupAnchor: [0, -8],
+  });
+
+
   var markersLayer = new L.LayerGroup();
-
-  /*socket.on('updateDetailsForBrowsers', function(data){
-        var marker;
-        markersLayer.clearLayers();
-        console.log(data);
-        if(data.length >0){
-          $(".numberOfTrucks").html(data.length);
-          $(".numberOfTrucks").removeClass("none");
-        }
-        else if(data.length ==0){
-          $(".numberOfTrucks").html(" No devices connected ");
-          $(".numberOfTrucks").addClass("none");
-        }
-
-
-        var locations = [];
-        $(".main-data").html("");
-        data.forEach(function(details){
-          var popup = L.popup()
-                      .setLatLng([details.latitude, details.longitude])
-                      .setContent('<b>'+details.IMEI+'</b><br><b>velocity: </b>'+details.velocity+'</br><b>batteryLevel: </b>'+details.batteryLevel+'</br><b>batteryTemperature: </b>'+details.batteryTemperature+'<br /><b>batteryStatus: </b>'+details.batteryStatus);
-
-          marker = L.marker([details.latitude, details.longitude], {
-              clickable: true
-          }).bindPopup(popup, {showOnMouseOver:true});
-          marker.on('click', function(e){
-            console.log("clcked in");
-            console.log(details);
-            console.log(e);
-          });
-          markersLayer.addLayer(marker);
-          locations.push({lat: details.latitude, lng: details.longitude});
-          var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td><td>"+details.batteryLevel+"</td><td>"+details.batteryTemperature+" C"+"</td><td>"+details.batteryStatus+"</td></tr>";
-            $(".main-data").append(html);
-        })
-
-        markersLayer.addTo(mymap);
-  })*/
-
+  var battery = new ProgressBar.Circle("#battery-progress", {
+                strokeWidth: 6,
+                easing: 'easeInOut',
+                duration: 1400,
+                color: '#53b877',
+                trailColor: '#eee',
+                trailWidth: 1,
+                svgStyle: null,
+                text: {
+                    value: "",
+                    alignToBottom: false
+                  }
+              });
+  var velocity=  new ProgressBar.Circle("#velocity-progress", {
+                strokeWidth: 6,
+                easing: 'easeInOut',
+                duration: 1400,
+                color: '#f53b9d',
+                trailColor: '#eee',
+                trailWidth: 1,
+                svgStyle: null,
+                text: {
+                    value: "",
+                    alignToBottom: false
+                  }
+              });
   socket.on('updateObjectDetailsForBrowsers', function(data){
-    console.log(data);
-    var marker;
     markersLayer.clearLayers();
     var locations = [];
     $(".main-data").html("");
     var length = 0;
+    
 
     for (var key in data) {
       if (data.hasOwnProperty(key)) {
         var details = data[key];
+        var icon = null;
         length++;
         if(details.latitude){
+
+          if(details.velocity>40){
+            icon=redIcon;
+          }
+          else if(details.velocity<40 && details.velocity >0){
+            icon=greenIcon;
+          }
+          else
+          {
+            icon=yellowIcon;
+          }
           var popup = L.popup()
                       .setLatLng([details.latitude, details.longitude])
                       .setContent('<b>'+details.IMEI+'</b><br><b>velocity: </b>'+details.velocity+'</br><b>batteryLevel: </b>'+details.batteryLevel+'</br><b>batteryTemperature: </b>'+details.batteryTemperature+'<br /><b>batteryStatus: </b>'+details.batteryStatus);
 
-          marker = L.marker([details.latitude, details.longitude], {
-              clickable: true
+          var marker = L.marker([details.latitude, details.longitude], {
+              clickable: true,
+              icon: icon,
+              rotationAngle: details.bearing
           }).bindPopup(popup, {showOnMouseOver:true});
           marker.on('click', function(e){
-            console.log("clcked in");
+
+            $.ajax({
+              url:"/api/truck-picture",
+              method:"POST",
+              data:{
+                IMEI:details.IMEI
+              },
+              success:function(data){
+                console.log(JSON.parse(data));
+                $(".truck-image").css("background-image",'url('+JSON.parse(data).url+')');
+                
+                velocity.setText(details.velocity+'mph');
+                velocity.animate(details.velocity/200); 
+                battery.setText(details.batteryLevel/100+'%');
+                battery.animate(details.batteryLevel/100);
+                $("#battery-status").html("<b>"+details.batteryStatus+"</b>")
+              },
+              error:function(err){
+                console.log(err);
+
+              }
+            })
             console.log(details);
-            console.log(e);
           });
           markersLayer.addLayer(marker);
           locations.push({lat: details.latitude, lng: details.longitude});
@@ -203,56 +276,14 @@
           $(".main-data").append(html);
       }
     }
-
     $(".numberOfTrucks").html(length);
-    markersLayer.addTo(mymap);
-
+    markersLayer.addTo(mymap);  
+    console.log("asdfasdf");
   });
-
-  
-
-  /*var gmarkers = [];
-  function initializeMap(locations){
-    var latlongForPosition = [];
-    removeMarkers();
-    
-    locations.forEach(function(location){
-      var marker = new google.maps.Marker({
-                position: location,
-                map: map
-      });
-
-      gmarkers.push(marker);
-
-      latlongForPosition.push(new google.maps.LatLng(location.lat, location.lng));
-
-    })
-
-    var latlngbounds = new google.maps.LatLngBounds();
-    for (var i = 0; i < latlongForPosition.length; i++) {
-        latlngbounds.extend(latlongForPosition[i]);
-    }
-    map.fitBounds(latlngbounds);
-  }
-
-  function removeMarkers(){
-      for(i=0; i<gmarkers.length; i++){
-          gmarkers[i].setMap(null);
-      }
-  }*/
 </script>
-<script type="text/javascript">
-  mymap = L.map("mapid").setView([19.5125, -98.9800], 13);
-  //mymap.options.minZoom = 13;
-  //mymap.options.maxZoom = 14;
-  L.esri.basemapLayer("Topographic").addTo(mymap);
-  var caminos = L.esri.featureLayer({
-    url: '/api/layer'
-  }).addTo(mymap);
-</script>
+
 <script type="text/javascript">
   $("#searchIMEI").submit(function(e){
-    console.log("working in here");
     var IMEI = $(".imeiinput").val();
     socket.emit('getLocation', {IMEI:IMEI});
     e.preventDefault();
