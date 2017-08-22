@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "dependencies": {
     "jquery": "^3.2.1",
-    "jquery-validation": "^1.17.0"
+    "jquery-validation": "^1.17.0",
+    "leaflet-rotatedmarker": "^0.2.0",
+    "progressbar.js": "^1.0.1"
   },
   "devDependencies": {}
 }
