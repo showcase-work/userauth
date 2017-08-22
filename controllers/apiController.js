@@ -33,7 +33,6 @@ module.exports = app => {
         })
     }
 
-    
 
     return {
         addLocTrackerDetails,

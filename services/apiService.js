@@ -36,6 +36,9 @@ module.exports = app => {
     function getTruckPicture(IMEI){
         return new Promise((resolve,reject)=>{
             request({url:'http://drongeic.mx:8080/movilidad/get_placa.php',qs:{imei:IMEI}}, function (error, response, body) {
+                console.log(IMEI)
+                console.log("working here")
+                console.log(error);
               return resolve(body);
             });
         })
