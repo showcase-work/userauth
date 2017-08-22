@@ -71,7 +71,7 @@
             <div class="card-main-content">
 
               <p style="margin-top: 5px;">VEHICULO SELECIONADO</p>
-              <p><b>IMEI</b></p>
+              <p id="imei"><b>IMEI</b></p>
               <div class="truck-image"></div>
               <div class="realtime-stats">
                 <div class="realtime-card velocity">
@@ -225,10 +225,10 @@
         length++;
         if(details.latitude){
 
-          if(details.velocity>40){
+          if(details.velocity>10){
             icon=redIcon;
           }
-          else if(details.velocity<40 && details.velocity >0){
+          else if(details.velocity<10 && details.velocity >0){
             icon=greenIcon;
           }
           else
@@ -242,32 +242,31 @@
           var marker = L.marker([details.latitude, details.longitude], {
               clickable: true,
               icon: icon,
-              rotationAngle: details.bearing
+              rotationAngle: details.bearing,
+              markerData:details
           }).bindPopup(popup, {showOnMouseOver:true});
           marker.on('click', function(e){
-
+            console.log(e.target.options.markerData);
+            var markerdetails = e.target.options.markerData;
             $.ajax({
               url:"/api/truck-picture",
               method:"POST",
               data:{
-                IMEI:details.IMEI
+                IMEI:markerdetails.IMEI
               },
               success:function(data){
-                console.log(JSON.parse(data));
                 $(".truck-image").css("background-image",'url('+JSON.parse(data).url+')');
-                
-                velocity.setText(details.velocity+'mph');
-                velocity.animate(details.velocity/200); 
-                battery.setText(details.batteryLevel+'%');
-                battery.animate(details.batteryLevel/100);
-                $("#battery-status").html("<b>"+details.batteryStatus+"</b>")
+                velocity.setText(markerdetails.velocity+' m/s');
+                velocity.animate(markerdetails.velocity/200); 
+                battery.setText(markerdetails.batteryLevel+'%');
+                battery.animate(markerdetails.batteryLevel/100);
+                $("#imei").html("<b>"+markerdetails.IMEI+"</b>");
+                $("#battery-status").html("<b>"+markerdetails.batteryStatus+"</b>")
               },
               error:function(err){
                 console.log(err);
-
               }
             })
-            console.log(details);
           });
           markersLayer.addLayer(marker);
           locations.push({lat: details.latitude, lng: details.longitude});
@@ -278,7 +277,6 @@
     }
     $(".numberOfTrucks").html(length);
     markersLayer.addTo(mymap);  
-    console.log("asdfasdf");
   });
 </script>
 
