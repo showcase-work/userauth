@@ -257,7 +257,7 @@
               success:function(data){
                 $(".truck-image").css("background-image",'url('+JSON.parse(data).url+')');
                 velocity.setText(markerdetails.velocity+' m/s');
-                velocity.animate(markerdetails.velocity/200); 
+                velocity.animate(markerdetails.velocity/27); 
                 battery.setText(markerdetails.batteryLevel+'%');
                 battery.animate(markerdetails.batteryLevel/100);
                 $("#imei").html("<b>"+markerdetails.IMEI+"</b>");
