@@ -1,6 +1,6 @@
 "use strict";
 
-let request = require('request');
+let request = require('request').defaults({ encoding: null });
 
 module.exports = app => {
 
@@ -44,10 +44,24 @@ module.exports = app => {
         })
     }
 
+    function getTitleLayer(req, res, next){
+        
+        var qs = req.query;
+        var params = req.params;
+        console.log('http://drongeic.mx:6080/arcgis/rest/services/vehiculos/vuelo_drone_julio2017/MapServer/'+params["0"]);
+            request({url:'http://drongeic.mx:6080/arcgis/rest/services/vehiculos/vuelo_drone_julio2017/MapServer/'+params["0"], qs}, function (error, response, body) { 
+                //console.log(response.headers['content-type']);
+                //return resolve({body:body ,header:response.headers['content-type']});
+                    res.header("Content-Type", response.headers['content-type']);
+                    res.send(body);
+            })
+    }
+
     return {
         addLocTrackerDetails,
         getLayer,
         getLayerWithQuery,
-        getTruckPicture
+        getTruckPicture,
+        getTitleLayer
     };
 };

@@ -21,6 +21,10 @@ module.exports = app => {
         apiController.getTruckPicture(req,res,next);
     })
 
+    router.route('/title-layer/*').get((req,res,next)=>{
+        apiController.getTitleLayer(req,res,next);
+    })
+
     
     return router;
 };

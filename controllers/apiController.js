@@ -33,11 +33,16 @@ module.exports = app => {
         })
     }
 
+    function getTitleLayer(req,res,next){
+        apiService.getTitleLayer(req,res,next)
+    }
+
 
     return {
         addLocTrackerDetails,
         getLayer,
         getLayerWithQuery,
-        getTruckPicture
+        getTruckPicture,
+        getTitleLayer
     };
 };

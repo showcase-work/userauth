@@ -59,7 +59,7 @@
     <div class="container main-dashboard">
       <div class="left-section">
         <div class="card">
-            <h3>CAMINOS (<span class="numberOfTrucks">0</span>)</h3>
+            <h3>Camiones en ruta: <span class="numberOfTrucks">0</span></h3>
             <div class="card-main-content">
               <div id="mapid" style="width:100%;"></div>
             </div>
@@ -67,7 +67,7 @@
       </div><div class="right-section">
         <div class="card">
 
-            <h3>DETALLES DE VEHICULES</h3>
+            <h3>Detalles del camión</h3>
             <div class="card-main-content">
 
               <p style="margin-top: 5px;">VEHICULO SELECIONADO</p>
@@ -105,8 +105,6 @@
               <thead>
                 <tr>
                   <th>IMEI</th>
-                  <th>Longitude</th>
-                  <th>Latitude</th>
                   <th>Velocity</th>
                   <th>Bearing</th>
                   <th>Battery Level</th>
@@ -150,11 +148,19 @@
 <script type="text/javascript">
   var mymap = L.map("mapid").setView([19.5125, -98.9800], 13);
   //mymap.options.minZoom = 13;
-  //mymap.options.maxZoom = 14;
+  
+  
+
   L.esri.basemapLayer("Topographic").addTo(mymap);
   var caminos = L.esri.featureLayer({
     url: '/api/layer'
   }).addTo(mymap);
+
+  //mymap.options.maxZoom = 14;
+  L.esri.tiledMapLayer({
+      url: "/api/title-layer",
+
+    }).addTo(mymap);
 
   var socket = io();
   var markers = {};
@@ -271,7 +277,7 @@
           markersLayer.addLayer(marker);
           locations.push({lat: details.latitude, lng: details.longitude});
         }
-        var html = "<tr><td>"+details.IMEI+"</td><td>"+details.longitude+"</td><td>"+details.latitude+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td><td>"+details.batteryLevel+"</td><td>"+details.batteryTemperature+" C"+"</td><td>"+details.batteryStatus+"</td></tr>";
+        var html = "<tr><td>"+details.IMEI+"</td><td>"+details.velocity+"</td><td>"+details.bearing+"</td><td>"+details.batteryLevel+"</td><td>"+details.batteryTemperature+" C"+"</td><td>"+details.batteryStatus+"</td></tr>";
           $(".main-data").append(html);
       }
     }

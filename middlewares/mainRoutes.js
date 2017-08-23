@@ -6,14 +6,9 @@ module.exports = app => {
     
     app.use("/login", app.routes.login);
 
-    app.get("/", userController.authenticateAndAttachUser, (req,res,next)=>{     
-        if(req.user){
-            res.redirect("/user");
-        }
-        else
-        {
-            res.redirect("/login");
-        }
+    app.get("/", (req,res,next)=>{     
+      
+        res.render("main");
     })
 
     app.use("/signup", app.routes.signup);
