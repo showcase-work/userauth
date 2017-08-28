@@ -163,6 +163,7 @@
     }).addTo(mymap);
 
   var socket = io();
+  socket.emit('browserConnect', '');
   var markers = {};
 
   var yellowIcon = L.icon({

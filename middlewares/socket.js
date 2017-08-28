@@ -13,14 +13,17 @@ module.exports = app => {
         console.log("user connected");
 
         if(!(socket.id in allSocketsObject)){
-            io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+            //io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+            io.to('browsers').emit('updateObjectDetailsForBrowsers', allSocketsObject);
         }
         
         socket.on('disconnect', function(){
             if(socket.id in allSocketsObject){
                 console.log("mobile disconnected");
                 delete allSocketsObject[socket.id];
-                io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+                //io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+                io.to('browsers').emit('updateObjectDetailsForBrowsers', allSocketsObject);
+
             }
         });
 
@@ -37,14 +40,22 @@ module.exports = app => {
             
             console.log("update app details");
             allSocketsObject[socket.id] = data;
-            io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+            //io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+            io.to('browsers').emit('updateObjectDetailsForBrowsers', allSocketsObject);
+
             apiController.addLocTrackerDetails(data);
         });
+
+        socket.on('browserConnect', function(){
+            console.log("browser connected");
+             socket.join('browsers');
+        })
 
         socket.on('initialDetails', function(data){
             console.log(data);
             console.log("adding to initial Details");
             allSockets[data.IMEI]=socket;
+
         });
 
         socket.on('getLocation', function(data){
@@ -65,7 +76,8 @@ module.exports = app => {
                 }
               }
             }
-            io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+            //io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
+            io.to('browsers').emit('updateObjectDetailsForBrowsers', allSocketsObject);
         });
 
     });
