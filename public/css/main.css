@@ -637,7 +637,8 @@ nav{
   box-shadow: 2px 5px 11px 2px rgba(0, 0, 0, 0.29);
 }
 
-#mapid { height: 600px; }
+#mapid { min-height: 100vh;
+height:400px; }
 
 .realtime-stats{
   display: flex;
@@ -684,7 +685,84 @@ nav{
 
 .truck-image{
   width:100%;
-  height:300px;
   background-size: cover;
   background-position: center center;
+}
+
+.uk-flex .left-section{
+  width:300px !important;
+  min-width: 300px;
+  min-height: 100vh;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.left-section .header-info{
+  min-height: 200px;
+  padding: 10px;
+  display: inline-block;
+  width:100%;
+  position: relative;
+}
+
+.left-section .header-info input{
+  width:100%;
+  border:1px solid #ebebeb;
+  border-radius: 5px;
+  padding-left: 40px;
+}
+
+.left-section .header-info a{
+  position:absolute;
+  top:8px;
+  left:10px;
+}
+
+.left-section .main-inner-container{
+  padding:10px;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.left-section .main-inner-container p{
+  margin:0px;
+  padding:0px;
+  font-size: 12px;
+  color: #7c97c2;
+}
+
+.left-section .main-inner-container p b{
+  font-size: 14px;
+  color:#22324e;
+}
+
+.left-section .main-inner-container .stats{
+  width:50px; display: inline-block;
+  margin-top: 10px;
+}
+
+.right-section{
+  position: relative;
+}
+
+.trucks-count{
+  position: absolute;
+  display: inline-block;
+  right:10px;
+  top:10px;
+  background-color: white;
+  border:1px solid #ebebeb;
+  padding:10px;
+  border-radius: 10px;
+  color: #46b53c;
+  z-index: 500000;
+  font-size: 14px;
+}
+
+.search-button, .search-button:hover{
+  position:absolute;
+  background-color: transparent;
+  border:none;
+  font-size: 15px;
+  top:12px;
+  right:10px;
+  color:#444;
 }

@@ -25,24 +25,56 @@
 </head>
 <body>
 
-
-    <nav class="uk-navbar">
-        
-        <div class="uk-navbar-flip">
-            <ul class="uk-navbar-nav">
-                <li data-uk-dropdown="{mode:'click'}" class="language">
-                        <button class="uk-button uk-button-default" type="button">Usario</button>
-                        <div class="uk-dropdown">
-                            <ul class="uk-nav uk-dropdown-nav">
-                                <li><a href="/?language=en">EN</a></li>
-                                <li><a href="/">ES</a></li>
-                            </ul>
-                        </div>
-                </li>
-            </ul>
+   <div class="uk-flex" uk-grid>
+     <div class="left-section">
+        <div class="header-info truck-image">
+          <a href="#toggler" class="uk-navbar-nav uk-navbar-toggle" data-uk-offcanvas="{target:'#toggler'}"></a>
+          <form action="/search" method="POST" id="searchIMEI">
+            <input type="text" name="imei" class="uk-input">
+            <button class="uk-button uk-button-primary search-button" type="input"><i class="fa fa-search"></i></button>
+          </form>
         </div>
-        <a href="#toggler" class="uk-navbar-nav uk-navbar-toggle" data-uk-offcanvas="{target:'#toggler'}"></a>
-    </nav>
+        <div class="main-info main-inner-container">
+          <p>IMEI</p>
+          <p class='imei' id="imei"><b>39875793564729474</b></p>
+          <p style="margin-top: 5px;">CONDUCTOR</p>
+          <p class="conductor-name"><b>JUAN PACO PEDRO</b></p>
+        </div>
+        <div class="stats uk-grid uk-grid-collapse uk-child-width-expand@s uk-text-center main-inner-container" uk-grid>
+            <div class="realtime-card velocity uk-width-1-3 uk-text-center">
+              <p>VELOCIDAD</p>
+              <div class="velocity-level stats" id="velocity-progress"></div>
+            </div>
+            <div class="realtime-card battery-level uk-width-1-3 uk-text-center">
+              <p>BATERIA</p>
+              <div id="battery-progress" class="stats"></div>
+            </div>
+            <div class="realtime-card battery-status uk-width-1-3 uk-text-center">
+              <p>STATUS</p>
+              <div id="battery-status"><b></b></div>
+            </div>
+        </div>
+        <div class="more-stats main-inner-container">
+          <div class="uk-grid" uk-grid>
+            <div class="uk-width-1-2 uk-text-left"><p>VELOCIDAD PROMEDIO</p></div>
+            <div class="uk-width-1-2 uk-text-right"><p><b>4.5</b></p></div>
+          </div>
+          <div class="uk-grid" uk-grid>
+            <div class="uk-width-1-2 uk-text-left"><p>TIEMPO DE RUTA</p></div>
+            <div class="uk-width-1-2 uk-text-right"><p><b>419</b></p></div>
+          </div>
+        </div>
+
+     </div>
+     <div class="right-section uk-width-expand">
+          <div class="trucks-count">
+            <span class="numberOfTrucks">0</span> TRANSPORTES
+          </div>
+          <div id="mapid" style="width:100%;"></div>
+     </div>
+   </div>
+
+    
 
     <div id="toggler" class="uk-offcanvas">
         <div class="uk-offcanvas-bar">
@@ -56,51 +88,11 @@
     </div>
 
 
-    <div class="container main-dashboard">
-      <div class="left-section">
-        <div class="card">
-            <h3>Camiones en ruta: <span class="numberOfTrucks">0</span></h3>
-            <div class="card-main-content">
-              <div id="mapid" style="width:100%;"></div>
-            </div>
-        </div>
-      </div><div class="right-section">
-        <div class="card">
-
-            <h3>Detalles del camión</h3>
-            <div class="card-main-content">
-
-              <p style="margin-top: 5px;">VEHICULO SELECIONADO</p>
-              <p id="imei"><b>IMEI</b></p>
-              <div class="truck-image"></div>
-              <div class="realtime-stats">
-                <div class="realtime-card velocity">
-                  <p>VELOCIDAD</p>
-                  <div class="velocity-level" id="velocity-progress"></div>
-                </div>
-                <div class="realtime-card battery-level">
-                  <p>BATERIA</p>
-                  <div id="battery-progress"></div>
-                </div>
-                <div class="realtime-card battery-status">
-                  <p>STATUS</p>
-                  <div id="battery-status"><b></b</div>
-                </div>
-              </div>
-            </div>
-        </div>
-      </div>
-    </div>
+   
 
     <div class="container" style="padding:50px;">
          
           <div class="table-responsive">
-            <div class="filters">
-              <form action="/search" method="POST" id="searchIMEI">
-                <input type="text" name="imei" class="uk-input imeiinput">
-                <button class="uk-button uk-button-primary" type="input">Submit</button>
-              </form>
-            </div>
             <table class="table">
               <thead>
                 <tr>

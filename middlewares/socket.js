@@ -12,10 +12,6 @@ module.exports = app => {
         
         console.log("user connected");
 
-        if(!(socket.id in allSocketsObject)){
-            //io.emit('updateObjectDetailsForBrowsers', allSocketsObject);
-            io.to('browsers').emit('updateObjectDetailsForBrowsers', allSocketsObject);
-        }
         
         socket.on('disconnect', function(){
             if(socket.id in allSocketsObject){
@@ -49,6 +45,7 @@ module.exports = app => {
         socket.on('browserConnect', function(){
             console.log("browser connected");
              socket.join('browsers');
+             io.to('browsers').emit('updateObjectDetailsForBrowsers', allSocketsObject);
         })
 
         socket.on('initialDetails', function(data){
