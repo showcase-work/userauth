@@ -260,7 +260,7 @@
                 battery.animate(markerdetails.batteryLevel/100);
                 $("#imei").html("<b>"+markerdetails.IMEI+"</b>");
                 $("#battery-status").html("<b>"+markerdetails.batteryStatus+"</b>");
-                UIkit.offcanvas.show('#toggler');
+                UIkit.offcanvas.show('#toggler', {mode:'slide'});
               },
               error:function(err){
                 console.log(err);
@@ -277,6 +277,7 @@
     $(".numberOfTrucks").html(length);
     markersLayer.addTo(mymap);  
   });
+
 </script>
 
 <script type="text/javascript">
