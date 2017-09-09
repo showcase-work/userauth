@@ -40,7 +40,7 @@ ul{
   margin-top:5px;
   margin-left:2px;
   margin-bottom: 0px;
-  width:100%; 
+  width:100%;
   }
 
 .bootstrap-tagsinput .tag{
@@ -71,35 +71,35 @@ margin-bottom: -1px;
 }
 
 .arrow-down {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-top: 8px solid #34495e;
 }
 
 .arrow-up {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent;
   border-bottom: 8px solid #34495e;
 }
 
 .arrow-right {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 60px solid transparent;
   border-bottom: 60px solid transparent;
   border-left: 60px solid green;
 }
 
 .arrow-left {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent; 
-  border-right:10px solid blue; 
+  border-bottom: 10px solid transparent;
+  border-right:10px solid blue;
 }
 
 .error{
@@ -399,7 +399,7 @@ ul.genres-container li{
   margin-bottom: -10px;
 }
 
-    
+
 
 .media-main{
   width:100%;
@@ -410,7 +410,7 @@ ul.genres-container li{
 }
 
 .project-media-block-container{
-  
+
 }
 .project-media-block-container .project-work-media-container{
   padding:15px;
@@ -546,7 +546,7 @@ ul.genres-container li{
 .comments-share-project-container .project-share-container li button{
   height:50px;
   border-radius: 0px;
-  
+
 }
 
 .comments-share-project-container .project-share-container li button.fb{
@@ -630,7 +630,7 @@ nav{
   padding:20px;
   background-color: #2b3d58;
   color:#acc7ef;
-  margin-bottom: 0px;  
+  margin-bottom: 0px;
 }
 
 .card{
@@ -744,7 +744,7 @@ height:400px; }
 }
 
 .left-section .main-inner-container .stats{
-  width:50px; display: inline-block;
+  width:100px; display: inline-block;
   margin-top: 10px;
   font-size: 8px;
 }
