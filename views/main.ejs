@@ -154,7 +154,7 @@
     }).addTo(mymap);
 
   var socket = io();
-  socket.emit('browserConnect', '');
+  socket.emit('browserConnect', {company:5});
   var markers = {};
 
   var yellowIcon = L.icon({

@@ -56,6 +56,9 @@ module.exports = app => {
         },
             batteryTemperature:{
                 type: Sequelize.STRING
+        },
+            company_id:{
+                type: Sequelize.INTEGER
         }
 
     },
@@ -78,7 +81,8 @@ module.exports = app => {
                 latitude:params.latitude,
                 batteryLevel:params.batteryLevel,
                 batteryStatus:params.batteryStatus,
-                batteryTemperature:params.batteryTemperature
+                batteryTemperature:params.batteryTemperature,
+                company_id:params.company
             });
     }
 

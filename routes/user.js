@@ -14,8 +14,11 @@ module.exports = app => {
     });
 
     router.route('/delete').post((req,res,next)=>{
+        console.log(req.query);
+        console.log(req.body);
         return userController.deleteUser(req,res,next);
     });
+
     return router;
 };
 

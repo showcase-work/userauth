@@ -8,7 +8,7 @@ module.exports = app => {
     let passport = app.auth.passport;
 
     function getToken(req, res, next){
-        tokenService.generateToken({id:req.user.id, name:req.user.username }).then(token=>{
+        tokenService.generateToken({id:req.user.id, name:req.user.username, company:req.user.company_id, email:req.user.email}).then(token=>{
             var generatedToken = token;
             req.token = generatedToken;
             next();
@@ -17,7 +17,8 @@ module.exports = app => {
 
     function respond(req, res) { 
       res.status(200).json({
-      token: req.token
+        token: req.token,
+        company: req.user.company_id
       });
     }
 

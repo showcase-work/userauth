@@ -7,6 +7,7 @@ module.exports = app => {
     let sequelize = app.db.connection;
     let logger = app.helpers.logger;
     let errorFormatter = app.helpers.errorFormatter;
+    let Company = app.models.company.Company
 
     var User = sequelize.define("users", {  
         id: {
@@ -20,6 +21,9 @@ module.exports = app => {
         },
             username: {
             type: Sequelize.STRING
+        },
+            company_id: {
+            type: Sequelize.INTEGER
         },
             password: {
             type: Sequelize.STRING
@@ -62,11 +66,17 @@ module.exports = app => {
  
     function createNewuser(params){
         console.log(User);
-            return User.create({username:params.username, password:params.password});
+            return User.create({username:params.username, password:params.password, email:params.email, company_id:params.company});
     }
 
     function getAllUsers(){
-        return User.findAll()
+        return User.findAll({
+            include:[
+                {
+                    model:Company
+                }
+            ]
+        })
     }
 
     function deleteUser(id){
@@ -76,6 +86,8 @@ module.exports = app => {
             }
         })
     }
+
+    User.belongsTo(Company,{target: 'id', foreignKey:'company_id'});
 
 
     return {

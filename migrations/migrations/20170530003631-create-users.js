@@ -38,8 +38,6 @@ module.exports = {
       }
     ]);    
 
-    console.log("all done");
-
   },
   down: function(queryInterface, Sequelize) {
     return queryInterface.dropTable('users');

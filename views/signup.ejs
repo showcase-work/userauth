@@ -25,17 +25,28 @@
             <h4 class="modal-title" id="myModalLabel">Signup</h4>
           </div>
           <form id="login-form" method = "post" action = "/signup" >
-
-            <div class="modal-body">
-                    <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "text" placeholder="username" name="username" />
-                    <input style="margin-left:0px;margin-right:0px;" class = "form-control-personal" type = "password" placeholder="password" name="password" />
-              
+          <div style="text-align: center;">
+            <div class="col-sm-4" style="float:none; display: inline-block; margin-top: 10px;">
+                    <div>
+                      <input class = "form-control-personal" type = "text" placeholder="username" name="username" />
+                    </div>
+                    <div>
+                      <input class = "form-control-personal" type = "password" placeholder="password" name="password" />
+                    </div>
+                    <div>
+                      <select name="company" class="form-control-personal">
+                        <%company.forEach(function(comp){%>
+                          <option value="<%=comp.id%>"><%=comp.name%></option>
+                        <%})%>
+                      </select>
+                    </div>
+                    
               <%if(typeof error != 'undefined'){%>
                 <div class="error-message"><%=error.message%></div>
               <%}%>
               <button type="submit" class="btn btn-primary login-local" style="margin-top:20px;">Signup</button>
             </div>
-
+          </div>
           </form>
             
     </div>

@@ -21,6 +21,9 @@ module.exports = app => {
 
     app.use("/user", app.routes.user);
 
+    app.use("/company", app.routes.company);
+
+
     app.get("/authenticate", userController.authenticateAndAttachUser, (req,res,next) => {
         res.send(true);
         //return res.render("discover/discover", {title:"User Authentication", user:req.user});

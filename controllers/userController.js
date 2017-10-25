@@ -3,6 +3,7 @@
 module.exports = app => {
     let tokenService = app.services.tokenService;
     let userService = app.services.userService;
+    let companyService = app.services.companyService;
 
     function authenticateAndAttachUser(req,res,next) {
         console.log(req.headers.authorization);
@@ -27,7 +28,7 @@ module.exports = app => {
             userService.createUser(req.body).then((data)=>{
                 if(data){
                     console.log(data);
-                    res.redirect("main");
+                    res.redirect("/user");
                 }
                 //res.send(data);
             }).catch(err=>{
@@ -44,28 +45,57 @@ module.exports = app => {
 
 
     function getAllUsers(req,res,next){
+        var objectToSend = {users:null,company:null};
         userService.getAllUsers().then(data=>{
-            res.send(data);
+            objectToSend.users=data;
+            companyService.getAllCompanies().then(companies=>{
+                objectToSend.company=companies;
+                console.log(objectToSend);
+                res.render("users",objectToSend);
+            }).catch(err=>{
+                console.log("herhehehhe");
+                console.log(err);
+                next(err);
+            })
             //return res.render("users",{users:data});
         }).catch(err=>{
-            return reject(err);
+            console.log("no one")
+            console.log(err);
+            next(err);
         })
     }
 
     function deleteUser(req,res,nexr){
-        User.deleteUser(req.query.id).then(data=>{
-            return resolve(data);
+        userService.deleteUser(req.body.id).then(data=>{
+            res.send(true);
         }).catch(err=>{
-            return reject(err);
+            next(err);
         })
     }
 
-    
+    function getAllUsersAndRenderPage(req,res,next){
+        userService.getAllUsers().then(data=>{
+            res.send(data);
+            //return res.render("users",{users:data});
+        }).catch(err=>{
+            console.log(err);
+            next(err);
+        })
+    }
+
+    function renderSignup(req,res,next){
+        companyService.getAllCompanies().then(data=>{
+            console.log(data);
+            res.render("signup", {company:data});
+        })
+    }
 
     return {
         authenticateAndAttachUser,
         createAccount,
         getAllUsers,
-        deleteUser
+        deleteUser,
+        getAllUsersAndRenderPage,
+        renderSignup
     };
 };

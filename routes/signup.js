@@ -6,7 +6,7 @@ module.exports = app => {
     let userController = app.controllers.userController;
 
     router.route('/').get((req,res,next)=>{
-        return res.render("signup");
+        userController.renderSignup(req,res,next);
     });
 
 

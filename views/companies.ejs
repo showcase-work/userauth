@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <% include shared/styles %>
+
+    <title>Companies</title>
+
+    <style type="text/css">
+    .error-message{
+      color:red;
+      font-size: 14px;
+      padding-top: 5px;
+      font-weight: bold;
+    }
+    </style>
+
+</head>
+<body>
+
+    <div class="container">
+      <div class="row justify-content-center">
+      </div>
+        <h4>Companies</h4>
+        <table class="table" style="text-align:left;">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Details</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <%companies.forEach(function(company){%>
+            <tr>
+              <td><%=company.id%></td>
+              <td><%=company.name%></td>
+              <td><%=company.details%></td>
+              <td>
+                <!-- <button class="btn btn-warning" value="<%=company.id%>">Edit</button> -->
+                <button class="btn btn-danger delete" value="<%=company.id%>">Delete</button>
+              </td>
+            </tr>
+              <%})%>
+            <tr></tr>
+          </tbody>
+        </table>
+        <div style="inline-block">
+          <button class="btn btn-primary" data-toggle="modal" data-target="#addCompany">
+            + Add Company
+          </button>
+        </div>
+    </div>
+
+
+    <div class="modal" id="addCompany">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form action="/company/create" method="POST">
+            <div class="modal-header">
+              <h5 class="modal-title" style="display:inline-block">Add Company</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                  <input type="text" name="name" placeholder="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" name="details" placeholder="details" class="form-control" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="submit">Add</button>
+              <button type="button" class="btn btn-secondary" type="button" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+</body>
+<% include shared/scripts %>
+<script type="text/javascript">
+$(".delete").click(function(){
+  var self = $(this);
+  console.log(self.val());
+  var id = self.val();
+
+  $.ajax({
+    url:"/company/delete",
+    method:"POST",
+    data:{
+      id:id
+    },
+    success:function(data){
+      console.log(data);
+      self.parent().parent().remove();
+    },
+    err:function(data){
+      console.log(data);
+    }
+  })
+})
+</script>
+</html>
